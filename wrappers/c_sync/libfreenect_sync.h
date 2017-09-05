@@ -47,6 +47,10 @@
 extern "C" {
 #endif
 
+FREENECTAPI_SYNC freenect_device* get_device(int index);
+FREENECTAPI_SYNC freenect_context *get_context(void);
+
+
 FREENECTAPI_SYNC int freenect_sync_get_video_with_res(void **video, uint32_t *timestamp, int index,
         freenect_resolution res, freenect_video_format fmt);
 /*  Synchronous video function, starts the runloop if it isn't running

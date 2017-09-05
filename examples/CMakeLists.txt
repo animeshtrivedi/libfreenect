@@ -19,19 +19,21 @@ find_package(GLUT)
 if (Threads_FOUND AND OPENGL_FOUND AND GLUT_FOUND)
   include_directories(${THREADS_PTHREADS_INCLUDE_DIR} ${OPENGL_INCLUDE_DIR} ${GLUT_INCLUDE_DIR})
 
+  add_executable(freenect-atrexample atrexample.c)
   add_executable(freenect-glview glview.c)
   add_executable(freenect-regview regview.c)
   add_executable(freenect-hiview hiview.c)
   add_executable(freenect-chunkview chunkview.c)
   add_executable(freenect-micview micview.c)
 
+  target_link_libraries(freenect-atrexample freenect ${OPENGL_LIBRARIES} ${GLUT_LIBRARY} ${CMAKE_THREAD_LIBS_INIT} ${MATH_LIB})
   target_link_libraries(freenect-glview freenect ${OPENGL_LIBRARIES} ${GLUT_LIBRARY} ${CMAKE_THREAD_LIBS_INIT} ${MATH_LIB})
   target_link_libraries(freenect-regview freenect ${OPENGL_LIBRARIES} ${GLUT_LIBRARY} ${CMAKE_THREAD_LIBS_INIT} ${MATH_LIB})
   target_link_libraries(freenect-hiview freenect ${OPENGL_LIBRARIES} ${GLUT_LIBRARY} ${CMAKE_THREAD_LIBS_INIT} ${MATH_LIB})
   target_link_libraries(freenect-chunkview freenect ${OPENGL_LIBRARIES} ${GLUT_LIBRARY} ${CMAKE_THREAD_LIBS_INIT} ${MATH_LIB})
   target_link_libraries(freenect-micview freenect ${OPENGL_LIBRARIES} ${GLUT_LIBRARY} ${CMAKE_THREAD_LIBS_INIT} ${MATH_LIB})
 
-  install(TARGETS freenect-glview freenect-regview freenect-hiview freenect-chunkview freenect-micview
+  install(TARGETS freenect-atrexample freenect-glview freenect-regview freenect-hiview freenect-chunkview freenect-micview
           DESTINATION bin)
 endif ()
 

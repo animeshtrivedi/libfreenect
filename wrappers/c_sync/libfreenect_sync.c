@@ -384,7 +384,7 @@ int freenect_sync_get_depth_with_res(void **depth, uint32_t *timestamp, int inde
         freenect_resolution res, freenect_depth_format fmt)
 {
 	if (index < 0 || index >= MAX_KINECTS) {
-		printf("Error: Invalid index [%d]\n", index);
+		printf("Error: Invalid index [%d] \n", index);
 		return -1;
 	}
 	if (!thread_running || !kinects[index] || kinects[index]->depth.fmt != fmt
@@ -436,4 +436,15 @@ void freenect_sync_stop(void)
 		thread_running = 0;
 		pthread_join(thread, NULL);
 	}
+}
+
+freenect_device* get_device(int index){
+	if(kinects != NULL && kinects[index] != NULL)
+		return kinects[index]->dev;
+	else
+		return NULL;
+}
+
+freenect_context *get_context(void){
+	return ctx;
 }

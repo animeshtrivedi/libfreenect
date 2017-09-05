@@ -347,10 +347,12 @@ FN_INTERNAL int fnusb_keep_alive_led(freenect_context* ctx, libusb_device* audio
 	libusb_device_handle * audioHandle = NULL;
 
 	res = libusb_open(audio, &audioHandle);
+        printf(" first call returned ?? %d \n", res); 
 	if (res < 0) {
-		FN_ERROR("Failed to set the LED of K4W or 1473 device: %d\n", res);
+		FN_ERROR("[FIRST] Failed to set the LED of K4W or 1473 device: %d\n", res);
 		return res;
 	}
+#if 0 
 
 	// we need to do this as it is possible that the device was not closed properly in a previous session
 	// if we don't do this and the device wasn't closed properly - it can cause infinite hangs on LED and TILT functions
@@ -359,10 +361,10 @@ FN_INTERNAL int fnusb_keep_alive_led(freenect_context* ctx, libusb_device* audio
 
 	res = libusb_open(audio, &audioHandle);
 	if (res < 0) {
-		FN_ERROR("Failed to set the LED of K4W or 1473 device: %d\n", res);
+		FN_ERROR("[SECOND] Failed to set the LED of K4W or 1473 device: %d\n", res);
 		return res;
 	}
-
+#endif
 	res = libusb_claim_interface(audioHandle, 0);
 	if (res < 0)
 	{
